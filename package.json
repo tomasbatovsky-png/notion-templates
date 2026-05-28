@@ -1,0 +1,18 @@
+{
+  "name": "niche-template-factory",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "validate": "node src/validateConfig.js --config configs/beekeeping.sk.yaml",
+    "generate": "node src/generateTemplate.js --config configs/beekeeping.sk.yaml",
+    "listing": "node src/generateListing.js --config configs/beekeeping.sk.yaml"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.3.0",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "js-yaml": "^4.1.0",
+    "zod": "^3.23.8"
+  }
+}
