@@ -32,6 +32,54 @@ async function appendBlocks(blockId, blocks) {
   }
 }
 
+function richTextValue(value) {
+  return [{ type: "text", text: { content: String(value ?? "") } }];
+}
+
+function buildPageProperties(fields, row) {
+  const properties = {};
+
+  for (const field of fields) {
+    if (!(field.name in row)) continue;
+
+    const value = row[field.name];
+
+    switch (field.type) {
+      case "title":
+        properties[field.name] = { title: richTextValue(value) };
+        break;
+      case "rich_text":
+        properties[field.name] = { rich_text: richTextValue(value) };
+        break;
+      case "number":
+        properties[field.name] = { number: Number(value) };
+        break;
+      case "date":
+        properties[field.name] = { date: { start: String(value) } };
+        break;
+      case "select":
+        properties[field.name] = { select: { name: String(value) } };
+        break;
+      case "checkbox":
+        properties[field.name] = { checkbox: Boolean(value) };
+        break;
+      case "url":
+        properties[field.name] = { url: String(value) };
+        break;
+      case "email":
+        properties[field.name] = { email: String(value) };
+        break;
+      case "phone_number":
+        properties[field.name] = { phone_number: String(value) };
+        break;
+      default:
+        throw new Error(`Unsupported field type in sample row: ${field.type}`);
+    }
+  }
+
+  return properties;
+}
+
 async function createMainPage(config) {
   const parentPageId = process.env.NOTION_PARENT_PAGE_ID;
   if (!parentPageId) throw new Error("Missing NOTION_PARENT_PAGE_ID in .env");
@@ -81,6 +129,18 @@ async function createDatabase(parentPageId, db) {
   return database.id;
 }
 
+async function createSampleRows(databaseId, db) {
+  const rows = db.sample_rows || [];
+  if (rows.length === 0) return;
+
+  for (const row of rows) {
+    await notion.pages.create({
+      parent: { type: "database_id", database_id: databaseId },
+      properties: buildPageProperties(db.fields, row)
+    });
+  }
+}
+
 async function run() {
   if (!process.env.NOTION_API_KEY) throw new Error("Missing NOTION_API_KEY in .env");
 
@@ -91,18 +151,19 @@ async function run() {
 
   await appendBlocks(mainPageId, [
     heading2("Databázy"),
-    paragraph("Nižšie sú vygenerované základné databázy. Po vygenerovaní ich manuálne uprav, pridaj views a sample dáta.")
+    paragraph("Nižšie sú vygenerované základné databázy so vzorovými dátami. Po vygenerovaní ich manuálne uprav, pridaj views a dolad dashboard.")
   ]);
 
   for (const db of config.databases) {
     console.log(`Creating database: ${db.name}`);
-    await createDatabase(mainPageId, db);
+    const databaseId = await createDatabase(mainPageId, db);
+    await createSampleRows(databaseId, db);
   }
 
   console.log("");
   console.log("Done.");
   console.log(`Main Notion page ID: ${mainPageId}`);
-  console.log("Next: polish layout, add database views/sample data, then publish as duplicate template.");
+  console.log("Next: polish layout, add database views, screenshots and publish as duplicate template.");
 }
 
 run().catch((error) => {
