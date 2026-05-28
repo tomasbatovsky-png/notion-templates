@@ -1,0 +1,80 @@
+template_name: "Rybársky denník úlovkov"
+slug: "rybarsky-dennik-ulovkov"
+language: "sk"
+emoji: "🎣"
+target_user: "Rekreačný rybár, ktorý chce sledovať úlovky, miesta a úspešnosť nástrah."
+main_problem: "Pamätať si, kde, kedy, za akých podmienok a na čo ryby brali."
+
+positioning:
+  one_liner: "Jednoduchý Notion denník na úlovky, revíry, nástrahy, výpravy a výbavu."
+  promise: "Lepší prehľad o tom, ktoré miesta a nástrahy ti fungujú."
+
+sections:
+  - title: "Ako používať tento systém"
+    body: "Po každej výprave zapíš miesto, počasie, nástrahu a úlovky. Po pár týždňoch začneš vidieť, ktoré kombinácie fungujú."
+  - title: "Rýchly štart"
+    checklist:
+      - "Pridaj svoje obľúbené revíry"
+      - "Pridaj najčastejšie nástrahy"
+      - "Zapíš poslednú výpravu"
+      - "Doplň úlovky a poznámky"
+      - "Pozri si, čo fungovalo najlepšie"
+
+databases:
+  - name: "Úlovky"
+    description: "Záznamy jednotlivých úlovkov."
+    fields:
+      - name: "Úlovok"
+        type: "title"
+      - name: "Dátum"
+        type: "date"
+      - name: "Druh ryby"
+        type: "select"
+        options: ["Kapor", "Šťuka", "Zubáč", "Sumec", "Pstruh", "Iné"]
+      - name: "Dĺžka cm"
+        type: "number"
+      - name: "Váha kg"
+        type: "number"
+      - name: "Miesto"
+        type: "rich_text"
+      - name: "Nástraha"
+        type: "rich_text"
+      - name: "Počasie"
+        type: "select"
+        options: ["Slnečno", "Oblačno", "Dážď", "Vietor", "Zmena tlaku"]
+      - name: "Poznámky"
+        type: "rich_text"
+
+  - name: "Revíry"
+    description: "Miesta, kde chytáš."
+    fields:
+      - name: "Revír"
+        type: "title"
+      - name: "Typ vody"
+        type: "select"
+        options: ["Rieka", "Jazero", "Priehrada", "Potok", "Súkromný revír"]
+      - name: "Poznámky"
+        type: "rich_text"
+
+  - name: "Výbava"
+    description: "Prehľad rybárskej výbavy."
+    fields:
+      - name: "Položka"
+        type: "title"
+      - name: "Kategória"
+        type: "select"
+        options: ["Prút", "Navijak", "Nástrahy", "Oblečenie", "Doplnky", "Iné"]
+      - name: "Stav"
+        type: "select"
+        options: ["OK", "Opraviť", "Kúpiť nové"]
+      - name: "Poznámky"
+        type: "rich_text"
+
+listing:
+  price: 9
+  currency: "EUR"
+  keywords:
+    - "rybársky denník"
+    - "denník úlovkov"
+    - "evidencia úlovkov"
+    - "notion šablóna rybolov"
