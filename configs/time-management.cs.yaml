@@ -1,0 +1,221 @@
+template_name: "Denní plánovač"
+slug: "denni-planovac"
+language: "cs"
+emoji: "⏱️"
+target_user: "Člověk, který má hodně úkolů a potřebuje si z nich udělat realistický denní a týdenní plán."
+main_problem: "Převést chaotický seznam úkolů na jasné priority, časové bloky a první konkrétní kroky."
+
+positioning:
+  one_liner: "Jednoduchý Notion systém pro plánování dne, týdne, priorit, energie a soustředěné práce."
+  promise: "Méně zahlcení, jasnější priority a realističtější plán dne."
+
+sections:
+  - title: "Jak používat tento systém"
+    body: "Začni databází Úkoly. Všechny nápady a povinnosti zapiš bez třídění. Potom jim nastav prioritu, energii, odhad času a termín. Každé ráno vyber maximálně 3 hlavní priority a rozlož je do časových bloků."
+  - title: "Rychlý start"
+    checklist:
+      - "Vlož všechny aktuální úkoly do databáze Úkoly"
+      - "Označ Top 3 priority na dnešek"
+      - "U každého důležitého úkolu nastav odhad času"
+      - "Naplánuj 2–4 časové bloky"
+      - "Nech si minimálně 20 % dne jako rezervu"
+  - title: "Denní pravidla"
+    checklist:
+      - "Neplánuj víc než 3 hlavní priority denně"
+      - "Těžké úkoly dej do času nejvyšší energie"
+      - "Administrativu seskup do jednoho bloku"
+      - "Po 60–90 minutách práce zařaď pauzu"
+      - "Na konci dne udělej krátkou reflexi"
+  - title: "AI agent bonus"
+    body: "Pro verzi můžeš použít agenta Strategie řízení času. Agent pomáhá třídit úkoly, vybrat priority a vytvořit realistický plán dne nebo týdne."
+
+databases:
+  - name: "Úkoly"
+    description: "Centrální databáze všech úkolů, nápadů a povinností."
+    fields:
+      - name: "Úkol"
+        type: "title"
+      - name: "Stav"
+        type: "select"
+        options: ["Inbox", "Dnes", "Tento týden", "Čeká", "Hotovo", "Odložit"]
+      - name: "Priorita"
+        type: "select"
+        options: ["P1 zásadní", "P2 důležité", "P3 běžné", "Nízká"]
+      - name: "Energie"
+        type: "select"
+        options: ["Vysoká", "Střední", "Nízká"]
+      - name: "Odhad minut"
+        type: "number"
+      - name: "Termín"
+        type: "date"
+      - name: "Projekt"
+        type: "rich_text"
+      - name: "Poznámky"
+        type: "rich_text"
+    sample_rows:
+      - Úkol: "Připravit nabídku pro klienta"
+        Stav: "Dnes"
+        Priorita: "P1 zásadní"
+        Energie: "Vysoká"
+        Odhad minut: 90
+        Termín: "2026-06-01"
+        Projekt: "Klienti"
+        Poznámky: "Vyžaduje soustředění, naplánovat dopoledne."
+      - Úkol: "Vyřídit e-maily"
+        Stav: "Dnes"
+        Priorita: "P3 běžné"
+        Energie: "Nízká"
+        Odhad minut: 30
+        Termín: "2026-06-01"
+        Projekt: "Administrativa"
+        Poznámky: "Dát do jednoho bloku, nerozbíjet hlubokou práci."
+      - Úkol: "Sepsat nápady na nový produkt"
+        Stav: "Tento týden"
+        Priorita: "P2 důležité"
+        Energie: "Střední"
+        Odhad minut: 45
+        Termín: "2026-06-05"
+        Projekt: "Produkt"
+        Poznámky: "Stačí první hrubý seznam."
+
+  - name: "Denní plán"
+    description: "Konkrétní plán dne rozdělený do realistických bloků."
+    fields:
+      - name: "Blok"
+        type: "title"
+      - name: "Datum"
+        type: "date"
+      - name: "Typ bloku"
+        type: "select"
+        options: ["Hluboká práce", "Schůzka", "Administrativa", "Pauza", "Lehká práce", "Rezerva"]
+      - name: "Začátek"
+        type: "rich_text"
+      - name: "Konec"
+        type: "rich_text"
+      - name: "Výsledek"
+        type: "rich_text"
+      - name: "Poznámky"
+        type: "rich_text"
+    sample_rows:
+      - Blok: "Hluboká práce: nabídka pro klienta"
+        Datum: "2026-06-01"
+        Typ bloku: "Hluboká práce"
+        Začátek: "09:00"
+        Konec: "10:30"
+        Výsledek: "Hotový první draft nabídky"
+        Poznámky: "Bez e-mailů a notifikací."
+      - Blok: "E-mailový blok"
+        Datum: "2026-06-01"
+        Typ bloku: "Administrativa"
+        Začátek: "11:00"
+        Konec: "11:30"
+        Výsledek: "Inbox pod kontrolou"
+        Poznámky: "Odpovědět jen na důležité."
+      - Blok: "Rezerva"
+        Datum: "2026-06-01"
+        Typ bloku: "Rezerva"
+        Začátek: "15:30"
+        Konec: "16:30"
+        Výsledek: "Prostor na nečekané věci"
+        Poznámky: "Nepřeplňovat."
+
+  - name: "Týdenní priority"
+    description: "Přehled hlavních priorit na aktuální týden."
+    fields:
+      - name: "Priorita"
+        type: "title"
+      - name: "Týden"
+        type: "rich_text"
+      - name: "Oblast"
+        type: "select"
+        options: ["Práce", "Podnikání", "Osobní", "Zdraví", "Finance", "Učení"]
+      - name: "Dopad"
+        type: "select"
+        options: ["Vysoký", "Střední", "Nízký"]
+      - name: "Stav"
+        type: "select"
+        options: ["Nezačato", "Probíhá", "Hotovo", "Odloženo"]
+      - name: "Další krok"
+        type: "rich_text"
+    sample_rows:
+      - Priorita: "Dokončit první prodejní balík"
+        Týden: "2026-W23"
+        Oblast: "Podnikání"
+        Dopad: "Vysoký"
+        Stav: "Probíhá"
+        Další krok: "Připravit listing a screenshoty."
+      - Priorita: "Zlepšit ranní rutinu"
+        Týden: "2026-W23"
+        Oblast: "Zdraví"
+        Dopad: "Střední"
+        Stav: "Nezačato"
+        Další krok: "Nastavit první 30min ranní blok."
+
+  - name: "Brain dump"
+    description: "Místo na rychlé vypsání všeho, co zatěžuje hlavu."
+    fields:
+      - name: "Položka"
+        type: "title"
+      - name: "Kategorie"
+        type: "select"
+        options: ["Úkol", "Nápad", "Obava", "Čeká na někoho", "Později"]
+      - name: "Další krok"
+        type: "rich_text"
+      - name: "Převést do úkolů"
+        type: "checkbox"
+      - name: "Poznámky"
+        type: "rich_text"
+    sample_rows:
+      - Položka: "Mám moc rozpracovaných nápadů"
+        Kategorie: "Obava"
+        Další krok: "Vybrat jeden nápad na tento týden."
+        Převést do úkolů: true
+        Poznámky: "Neřešit všechno najednou."
+      - Položka: "Nápad na český Notion agent balík"
+        Kategorie: "Nápad"
+        Další krok: "Zařadit do týdenních priorit."
+        Převést do úkolů: true
+        Poznámky: "Možný Pro produkt."
+
+  - name: "Denní reflexe"
+    description: "Krátké večerní zhodnocení dne."
+    fields:
+      - name: "Reflexe"
+        type: "title"
+      - name: "Datum"
+        type: "date"
+      - name: "Co se povedlo"
+        type: "rich_text"
+      - name: "Co zlepšit"
+        type: "rich_text"
+      - name: "Energie dne"
+        type: "select"
+        options: ["Vysoká", "Střední", "Nízká"]
+      - name: "Poznámka na zítra"
+        type: "rich_text"
+    sample_rows:
+      - Reflexe: "Pondělí"
+        Datum: "2026-06-01"
+        Co se povedlo: "Dokončen hlavní pracovní blok."
+        Co zlepšit: "Neotevírat e-mail před první hlubokou prací."
+        Energie dne: "Střední"
+        Poznámka na zítra: "Začít nejdůležitějším úkolem."
+
+agent_bundle:
+  agent_name: "Strategie řízení času"
+  agent_file: "agents/time-management-strategist.cs.md"
+  example_prompts:
+    - "@Strategie řízení času naplánuj mi dnešní den"
+    - "@Strategie řízení času jsem zahlcený, pomoz mi určit priority"
+    - "@Strategie řízení času rozděl mi tyto úkoly do realistického týdne"
+
+listing:
+  price: 12
+  currency: "EUR"
+  keywords:
+    - "Notion plánovač česky"
+    - "denní plánovač"
+    - "time management Notion"
+    - "prioritizace úkolů"
+    - "Notion agent česky"
+    - "plánování týdne"
