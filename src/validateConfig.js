@@ -17,10 +17,18 @@ const FieldSchema = z.object({
   }
 });
 
+const SampleRowSchema = z.record(z.union([
+  z.string(),
+  z.number(),
+  z.boolean(),
+  z.null()
+]));
+
 const DatabaseSchema = z.object({
   name: z.string().min(1),
   description: z.string().optional(),
-  fields: z.array(FieldSchema).min(1)
+  fields: z.array(FieldSchema).min(1),
+  sample_rows: z.array(SampleRowSchema).optional()
 }).superRefine((db, ctx) => {
   const titleCount = db.fields.filter(f => f.type === "title").length;
   if (titleCount !== 1) {
