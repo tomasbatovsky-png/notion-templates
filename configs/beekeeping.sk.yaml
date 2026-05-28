@@ -1,0 +1,136 @@
+template_name: "Včelársky denník"
+slug: "vcelarsky-dennik"
+language: "sk"
+emoji: "🐝"
+target_user: "Hobby včelár s 5–30 úľmi"
+main_problem: "Mať prehľad o úľoch, kontrolách, liečení, kŕmení, medobraní a nákladoch."
+
+positioning:
+  one_liner: "Jednoduchý Notion systém pre evidenciu úľov, kontrol, liečenia, kŕmenia a medobrania."
+  promise: "Menej chaosu v poznámkach, viac prehľadu pred ďalšou kontrolou úľov."
+
+sections:
+  - title: "Ako používať tento systém"
+    body: "Začni databázou Úle. Potom pri každej kontrole pridaj nový záznam do Kontroly. Liečenie, kŕmenie a medobranie si zapisuj samostatne, aby si mal sezónny prehľad."
+  - title: "Rýchly štart"
+    checklist:
+      - "Pridaj všetky úle do databázy Úle"
+      - "Vyplň poslednú známu kontrolu"
+      - "Naplánuj ďalšiu kontrolu"
+      - "Zapíš aktuálne zásoby a stav matky"
+      - "Doplň liečenie a kŕmenie za aktuálnu sezónu"
+  - title: "Sezónny checklist"
+    checklist:
+      - "Jarná kontrola sily včelstva"
+      - "Kontrola zásob"
+      - "Sledovanie rojovej nálady"
+      - "Záznam liečenia"
+      - "Medobranie"
+      - "Jesenné kŕmenie"
+      - "Zimná kontrola bez rušenia včiel"
+
+databases:
+  - name: "Úle"
+    description: "Základná evidencia každého úľa."
+    fields:
+      - name: "Názov úľa"
+        type: "title"
+      - name: "Lokalita"
+        type: "rich_text"
+      - name: "Typ úľa"
+        type: "select"
+        options: ["B10", "Langstroth", "Dadant", "Iný"]
+      - name: "Rok matky"
+        type: "number"
+      - name: "Sila včelstva"
+        type: "select"
+        options: ["Silné", "Stredné", "Slabé", "Rizikové"]
+      - name: "Stav"
+        type: "select"
+        options: ["OK", "Bez matky", "Rojová nálada", "Treba kontrolu"]
+      - name: "Posledná kontrola"
+        type: "date"
+      - name: "Ďalšia kontrola"
+        type: "date"
+      - name: "Poznámky"
+        type: "rich_text"
+
+  - name: "Kontroly"
+    description: "Zápisy z pravidelných kontrol úľov."
+    fields:
+      - name: "Kontrola"
+        type: "title"
+      - name: "Dátum"
+        type: "date"
+      - name: "Úľ"
+        type: "rich_text"
+      - name: "Plod"
+        type: "select"
+        options: ["Žiadny", "Slabý", "Dobrý", "Výborný"]
+      - name: "Zásoby"
+        type: "select"
+        options: ["Málo", "Stredne", "Dosť"]
+      - name: "Rojová nálada"
+        type: "checkbox"
+      - name: "Ďalší krok"
+        type: "rich_text"
+      - name: "Poznámky"
+        type: "rich_text"
+
+  - name: "Liečenie"
+    description: "Záznamy o liečení a zásahoch."
+    fields:
+      - name: "Záznam"
+        type: "title"
+      - name: "Dátum"
+        type: "date"
+      - name: "Úľ"
+        type: "rich_text"
+      - name: "Prípravok"
+        type: "rich_text"
+      - name: "Dávka"
+        type: "rich_text"
+      - name: "Poznámky"
+        type: "rich_text"
+
+  - name: "Medobranie"
+    description: "Prehľad výnosov medu podľa úľov a sezóny."
+    fields:
+      - name: "Medobranie"
+        type: "title"
+      - name: "Dátum"
+        type: "date"
+      - name: "Úľ"
+        type: "rich_text"
+      - name: "Kg medu"
+        type: "number"
+      - name: "Typ medu"
+        type: "select"
+        options: ["Kvetový", "Lesný", "Agátový", "Zmiešaný"]
+      - name: "Poznámky"
+        type: "rich_text"
+
+  - name: "Náklady"
+    description: "Výdavky na včelárstvo."
+    fields:
+      - name: "Výdavok"
+        type: "title"
+      - name: "Dátum"
+        type: "date"
+      - name: "Kategória"
+        type: "select"
+        options: ["Krmivo", "Liečenie", "Výbava", "Úle", "Doprava", "Iné"]
+      - name: "Suma"
+        type: "number"
+      - name: "Poznámka"
+        type: "rich_text"
+
+listing:
+  price: 9
+  currency: "EUR"
+  keywords:
+    - "včelársky denník"
+    - "evidencia úľov"
+    - "notion šablóna včelárstvo"
+    - "liečenie včiel evidencia"
+    - "medobranie záznamy"
